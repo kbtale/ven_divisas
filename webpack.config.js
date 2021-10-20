@@ -24,5 +24,10 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin()
-    ]
+    ],
+    resolve: {
+        fallback: {
+          util: require.resolve("util/")
+        }
+    }
 };

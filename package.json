@@ -24,6 +24,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "regenerator-runtime": "^0.13.9",
+    "util": "^0.12.4",
     "vue": "^2.6.14"
   },
   "devDependencies": {
