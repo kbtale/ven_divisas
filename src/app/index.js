@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Box from './components/box.vue'
 import VueRouter from 'vue-router'
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 import Converter from './components/converter.vue'
 import Graphic from './components/historyGraphic.vue'
 import Rates from './components/rates.vue'
@@ -25,7 +27,7 @@ const app = new Vue ({
     Graphic
   },
   methods: {
-    copyToClipboard(){
+    copyToClipboard(text, successText, failText){
       const textArea = document.createElement('textarea');
       textArea.style.position = 'fixed';
       textArea.style.top = '0';
@@ -37,7 +39,7 @@ const app = new Vue ({
       textArea.style.outline = 'none';
       textArea.style.boxShadow = 'none';
       textArea.style.background = 'transparent';
-      textArea.value = document.getElementsByName("symbol")[0].value;
+      textArea.value = text;
 
       document.body.appendChild(textArea);
       try {
@@ -45,10 +47,42 @@ const app = new Vue ({
         textArea.select();
         textArea.setSelectionRange(0, 99999);
         document.execCommand("copy");
+        if (successText)
+          this.createAlert(successText, "success")
       } catch (err) {
         console.log('Error: Unable to copy the text. ' + err);
+        if (failText)
+          this.createAlert(failText, "fail")
       }
       document.body.removeChild(textArea);
+    },
+    createAlert(text, aType){
+      const alert = document.createElement("div");
+      alert.className = `alert alert-${aType} alert-dismissible fade hide`;
+      alert.setAttribute("role", "alert");
+      alert.style.zIndex = "12";
+      var content = document.createElement("h6");
+      content.innerHTML = text;
+      var closeBtn = document.createElement("button");
+      closeBtn.setAttribute("type", "button");
+      closeBtn.className = "btn-close";
+      closeBtn.dataset.bsDismiss = "alert";
+      closeBtn.setAttribute("aria-label", "Close");
+      alert.insertAdjacentElement("afterbegin",content);
+      alert.insertAdjacentElement("beforeend",closeBtn);
+      if (!document.getElementById("AlertsContainer")) {
+        var container = document.createElement("div");
+        container.className = "position-fixed bottom-0 end-0 me-2";
+        container.setAttribute("id","AlertsContainer");
+        container.style.zIndex = "11";
+        document.body.insertAdjacentElement("beforeend", container);
+      } else {
+        container = document.getElementById("AlertsContainer");
+      }
+      container.insertAdjacentElement("afterbegin", alert);
+      setTimeout(function(){alert.classList.toggle("hide"); alert.classList.toggle("show")},350);
+      setTimeout(function(){alert.classList.toggle("hide"); alert.classList.toggle("show")},4000);
+      setTimeout(function(){alert.remove()},4350);
     }
   },
   render: h => h(Box)
