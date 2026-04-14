@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/8ed70d09-9f35-4917-bfb1-e11245612355
+
 # VenDiv
 
 VenDiv is a currency monitor for the Venezuelan market. It tracks the exchange rate between the local Bolivar (VES) and international currencies: the US Dollar (USD), Euro (EUR), and Colombian Peso (COP).
