@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRatesStore } from '@/app/stores/rates'
+import { showToast } from '@/app/utils/toast'
 
 const store = useRatesStore()
 const baseSelected = ref(0)
@@ -31,9 +32,9 @@ const formatToMoney = (value) => {
 const copyToClipboard = async (text, successMsg) => {
   try {
     await navigator.clipboard.writeText(text.toString())
-    alert(successMsg || 'Copiado al portapapeles.')
+    showToast(successMsg || 'Copiado al portapapeles.')
   } catch (err) {
-    alert('No se pudo copiar.')
+    showToast('No se pudo copiar.', 'error')
   }
 }
 </script>

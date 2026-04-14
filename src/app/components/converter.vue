@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRatesStore } from '@/app/stores/rates'
+import { showToast } from '@/app/utils/toast'
 
 const store = useRatesStore()
 const currValue = ref(1)
@@ -28,9 +29,9 @@ const changeBase = (index) => {
 const copyToClipboard = async (text) => {
   try {
     await navigator.clipboard.writeText(text.toString())
-    alert('Cantidad copiada correctamente.')
+    showToast('Cantidad copiada correctamente.')
   } catch (err) {
-    alert('La cantidad no se pudo copiar.')
+    showToast('La cantidad no se pudo copiar.', 'error')
   }
 }
 
