@@ -9,6 +9,7 @@ onMounted(() => {
 })
 </script>
 
+<template>
   <div class="main-wrapper d-flex align-items-center min-vh-100 py-3 py-md-5">
     <div class="container container-custom">
       <div class="row justify-content-center mx-0">
@@ -94,4 +95,3 @@ onMounted(() => {
   transform: translateY(10px);
 }
 </style>
-pt>
