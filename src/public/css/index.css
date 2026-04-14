@@ -16,13 +16,13 @@ body {
   padding: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg-gradient);
+  background-attachment: fixed;
   min-height: 100vh;
   color: var(--text-main);
+  overflow-x: hidden;
 }
 
 #app {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 
