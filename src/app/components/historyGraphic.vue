@@ -133,8 +133,18 @@ onUnmounted(() => {
       <p class="mt-2 text-muted">Consultando registro histórico...</p>
     </div>
     
-    <div :class="{ 'opacity-50': loading }" class="chart-wrapper" style="height: 350px;">
-      <canvas ref="chartCanvas"></canvas>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10">
+        <div class="chart-container glass-effect p-3 p-md-4 rounded-4 border shadow-sm position-relative" style="height: 400px;">
+          <canvas 
+            ref="chartCanvas" 
+            role="img" 
+            aria-label="Gráfico de tendencia de precios de los últimos 30 días"
+          >
+            Tu navegador no soporta el elemento de gráfico. La tendencia muestra la variación del precio del Bolívar en el último mes.
+          </canvas>
+        </div>
+      </div>
     </div>
     
     <div class="alert alert-info mt-4 rounded-3 border-0 shadow-sm" style="background: rgba(0, 97, 255, 0.05); color: #004dc9;">

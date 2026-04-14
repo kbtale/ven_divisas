@@ -51,11 +51,13 @@ const inputNumbers = (evt) => {
         <div class="input-group mb-4">
           <input 
             type="text" 
+            id="base" 
             name="base" 
             v-model.number="currValue" 
             @keypress="inputNumbers" 
             class="form-control form-control-lg"
             placeholder="0.00"
+            aria-label="Cantidad en divisas"
           >
           <div class="btn-group">
             <button 
@@ -63,14 +65,15 @@ const inputNumbers = (evt) => {
               type="button" 
               data-bs-toggle="dropdown" 
               aria-expanded="false"
+              aria-label="Seleccionar moneda base"
             >
-              <div class="fflag ff-md" :class="[`fflag-${store.currentBase.country_code}`]"></div> 
+              <div class="fflag ff-md" :class="[`fflag-${store.currentBase.country_code}`]" aria-hidden="true"></div> 
               {{ store.currentBase.name }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li v-for="(rate, i) in store.rates" :key="i">
-                <a class="dropdown-item d-flex align-items-center gap-2" href="#" @click.prevent="changeBase(i)">
-                  <div class="fflag ff-md" :class="[`fflag-${rate.country_code}`]"></div> 
+                <a class="dropdown-item d-flex align-items-center gap-2" href="#" @click.prevent="changeBase(i)" :aria-label="`Cambiar a ${rate.name}`">
+                  <div class="fflag ff-md" :class="[`fflag-${rate.country_code}`]" aria-hidden="true"></div> 
                   {{ rate.name }}
                 </a>
               </li>
@@ -85,21 +88,25 @@ const inputNumbers = (evt) => {
         <label for="ves" class="form-label label-text">Cantidad en Bolívares Soberanos:</label>
         <div class="input-group mb-3">
           <input 
+            id="ves" 
             name="ves" 
             v-model="base_in_VES_formatted" 
             class="form-control form-control-lg bg-light" 
-            disabled
+            readonly
+            aria-live="polite"
+            aria-label="Resultado en Bolívares"
           >
           <button 
             class="btn btn-outline-primary d-flex align-items-center gap-2" 
             type="button" 
             @click="copyToClipboard(base_in_VES.toFixed(2))"
+            aria-label="Copiar resultado al portapapeles"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
             </svg>
-            Copiar
+            <span>Copiar</span>
           </button>
         </div>
       </div>

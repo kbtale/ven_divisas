@@ -9,13 +9,12 @@ onMounted(() => {
 })
 </script>
 
-<template>
   <div class="main-wrapper d-flex align-items-center min-vh-100 py-3 py-md-5">
     <div class="container container-custom">
       <div class="row justify-content-center mx-0">
-        <div class="card glass-card rounded-4 p-0 col-12 col-md-11 col-lg-10 shadow-lg border-0">
-          <div class="card-header border-0 bg-transparent p-0 mt-2">
-            <ul class="nav nav-pills nav-fill justify-content-center p-2 p-md-3 gap-1 gap-md-2">
+        <main class="card glass-card rounded-4 p-0 col-12 col-md-11 col-lg-10 shadow-lg border-0">
+          <header class="card-header border-0 bg-transparent p-0 mt-2">
+            <nav class="nav nav-pills nav-fill justify-content-center p-2 p-md-3 gap-1 gap-md-2" aria-label="Navegación principal">
               <li class="nav-item">
                 <router-link class="nav-link premium-nav-link p-2 p-md-3 d-flex align-items-center justify-content-center gap-2" to="/rates">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
@@ -43,8 +42,8 @@ onMounted(() => {
                   <span class="d-none d-sm-inline">Gráfico</span>
                 </router-link>
               </li>
-            </ul>
-          </div>
+            </nav>
+          </header>
           <div class="card-body p-3 p-md-4">
             <router-view v-slot="{ Component }">
               <transition name="page-fade" mode="out-in">
@@ -52,7 +51,7 @@ onMounted(() => {
               </transition>
             </router-view>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   </div>

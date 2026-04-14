@@ -63,40 +63,44 @@ const copyToClipboard = async (text, successMsg) => {
         <div 
           class="promedio-badge p-4 rounded-4 shadow-sm border-0 bg-primary bg-gradient text-white"
           role="button"
+          tabindex="0"
           @click="copyToClipboard(currentBase.VES_per_unity.toFixed(2), `Precio del ${currentBase.fullname} copiado.`)"
+          @keydown.enter="copyToClipboard(currentBase.VES_per_unity.toFixed(2), `Precio del ${currentBase.fullname} copiado.`)"
+          :aria-label="`Promedio actual ${currentBase.fullname}: ${formatToMoney(currentBase.VES_per_unity)}. Haz clic para copiar.`"
         >
           <h2 class="mb-0 h4 opacity-75">Promedio actual {{ currentBase.fullname }}</h2>
-          <div class="display-5 fw-bold mt-2">
+          <div class="display-5 fw-bold mt-2" aria-live="polite">
             {{ formatToMoney(currentBase.VES_per_unity) }}
           </div>
         </div>
       </div>
     </div>
 
-    <div class="rates-list glass-effect rounded-4 overflow-hidden border">
-      <div class="list-header d-flex p-3 bg-light border-bottom fw-bold text-muted">
+    <div class="rates-list glass-effect rounded-4 overflow-hidden border" role="list" aria-label="Lista de referencias de precios">
+      <div class="list-header d-flex p-3 bg-light border-bottom fw-bold text-muted" aria-hidden="true">
         <div class="flex-grow-1">Referencia</div>
         <div class="text-center" style="width: 150px;">Precio</div>
         <div style="width: 50px;"></div>
       </div>
       
-      <div v-for="(val, key) in activeRates" :key="key" class="rate-item d-flex align-items-center p-3 border-bottom hover-bg">
+      <div v-for="(val, key) in activeRates" :key="key" class="rate-item d-flex align-items-center p-3 border-bottom hover-bg" role="listitem">
         <div class="flex-grow-1 d-flex align-items-center gap-3">
-          <div class="ref-icon rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+          <div class="ref-icon rounded-circle bg-white shadow-sm d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;" aria-hidden="true">
             <span class="fw-bold text-primary">{{ references[key]?.charAt(0) }}</span>
           </div>
           <span class="fw-medium">{{ references[key] }}</span>
         </div>
-        <div class="text-center fw-bold" style="width: 150px;">
+        <div class="text-center fw-bold" style="width: 150px;" :aria-label="`Precio: ${formatToMoney(val)}`">
           {{ formatToMoney(val) }}
         </div>
         <div class="text-end" style="width: 50px;">
           <button 
             class="btn btn-sm btn-link text-primary p-0" 
             @click="copyToClipboard(val.toFixed(2))"
+            :aria-label="`Copiar precio de ${references[key]}`"
             title="Copiar"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
               <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
             </svg>
